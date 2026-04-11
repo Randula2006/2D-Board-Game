@@ -6,9 +6,9 @@ typedef struct {
     int rows;
     int cols;
     int playerRow;
-    int plyerCol;
+    int playerCol;
     int enemyRow;
-    int emenyCol;
+    int enemyCol;
     int treasureRow;
     int treasureCol;
     int goalRow;
@@ -17,5 +17,8 @@ typedef struct {
 
 }Map;
 
+Map *createMap();
+char convertToChar(int item);
+void freeMap(Map *map);
 
 #endif /* MAP_H */

@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "map.h"
 
 char ** allocateGrid(int rows, int cols){
     int i;
@@ -12,39 +14,46 @@ char ** allocateGrid(int rows, int cols){
 }
 
 /* references :- https://www.geeksforgeeks.org/c/c-program-to-read-contents-of-whole-file/ */
-void createMap(){
-    /* special Object variables*/
-    int plyRow, plyCol, enemyRow, enemyCol, treRow, treCol, goalRow, goalCol;
+Map * createMap(){
 
     FILE * fptr = fopen("fileName.txt", "r");
+    Map *map;
 
-    /*variables for data storing*/
-    char values[20];
-    int rows, cols;
+    /* Allocate the Map struct itself */
+    map = (Map *)malloc(sizeof(Map));
+    map->treasureCollected = 0;
     
-    /* Read first line data of the file in specific format */
-    fscanf(fptr, "%d %d", &rows , &cols);
+    /* EXCEPTION :- if the file is NULL*/
+    if (fptr == NULL)
+    {
+        printf("Error: could not open file %s\n");
+        return NULL;
+    }
 
-    /* Initialize Map */
-    char **grid = allocateGrid(rows, cols);
+    /* Read dimensions into the struct directly */
+    fscanf(fptr, "%d %d", &map-> rows , &map-> cols);
+
+    /* Initialize Map store the grid into the struct */
+    map-> grid = allocateGrid(&map-> rows , &map-> cols);
 
     /* read the rest of the file */
     int i,j, item;
-    for (i = 0; i < rows; i++){
-        for (j = 0; j < cols; j++){
+    for (i = 0; i < map->rows; i++){
+        for (j = 0; j < map->cols; j++){
             fscanf(fptr, "%d", &item);
-            grid[i][j] = convertToChar(item);
+            map->grid[i][j] = convertToChar(item);
 
             /* Record the special objects */
-            if(item == 4){plyRow = i; plyCol = j;}
-            if(item == 5){enemyRow = i; enemyCol = j;}
-            if(item == 3){treRow = i; treCol = j;}
-            if(item == 2){goalRow = i; goalCol = j;}
+            if(item == 4){map->playerRow = i; map->playerCol = j;}
+            if(item == 5){map->enemyRow = i; map->enemyCol = j;}
+            if(item == 3){map->treasureRow = i; map->treasureCol = j;}
+            if(item == 2){map->goalRow = i; map->goalCol = j;}
 
         }
     }
 
     fclose(fptr);
+    return map; /* return the map to the called function*/
 }
 
 char convertToChar(int item){
@@ -65,3 +74,4 @@ char convertToChar(int item){
 
     return object;
 }
+
