@@ -17,8 +17,10 @@ typedef struct {
 
 }Map;
 
-Map *createMap();
+Map *createMap(const char *filename);
 char convertToChar(int item);
+void printMap(Map *map);
+
 void freeMap(Map *map);
 
 #endif /* MAP_H */
