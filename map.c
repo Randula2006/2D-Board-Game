@@ -95,9 +95,9 @@ Map * createMap(const char *filename){
 void printMap(Map *map){
     int i,j;
 
-    system("clear");    /* Reference :- Assignment supplementary video */
+
     /*Move cursor to top-lef coner*/
-    system("tput cup 0 0");
+    system("tput cup 0 0");    /* Reference :- Assignment supplementary video */
 
     /* Printing Border */
 
