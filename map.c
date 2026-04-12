@@ -153,7 +153,23 @@ void printMap(Map *map){
 /* Reference :- Assignment supplementary video */
 
 void freeMap(Map *map){
+    int i;
 
+    /* Free the grid */
+    for(i = 0; i < map->rows; i++){
+        free(map->grid[i]);
+    }
+    free(map->grid);
+
+    /* Free the type */
+    for (i = 0; i < map->rows; i++)
+    {
+        free(map->type[i]);
+    }
+    free(map->type);
+
+    /* Free the Map struct itself */
+    free(map);
 }
 
 
