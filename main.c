@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "map.h"
 #include "terminal.h"
+#include "player.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +29,7 @@ int main(int argc, char *argv[])
 
         if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
             /* TODO: make movement for the character*/
+            movePlayer(map, input);
         }
         else if (input == 'u'){ /* player undo control */
             /*TODO: undo controls*/
