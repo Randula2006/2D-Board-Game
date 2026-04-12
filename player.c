@@ -42,6 +42,7 @@ int moveUp(Map *map){
 
         map-> grid[oldRow][oldCol] = ' '; /* used character value as the grid itself is a character*/
         map-> type[oldRow][oldCol] = 0;
+        treasureCollected(map, targetRow, targetCol);
         map-> grid[targetRow][targetCol] = 'P'; /* new player position*/
         map-> type[targetRow][targetCol] = 4;
 
@@ -71,6 +72,7 @@ int moveDown(Map *map){
 
         map-> grid[oldRow][oldCol] = ' '; /* used character value as the grid itself is a character*/
         map-> type[oldRow][oldCol] = 0;
+        treasureCollected(map, targetRow, targetCol);
         map-> grid[targetRow][targetCol] = 'P'; /* new player position*/
         map-> type[targetRow][targetCol] = 4;
 
@@ -100,6 +102,7 @@ int moveLeft(Map *map){
 
         map-> grid[oldRow][oldCol] = ' '; /* used character value as the grid itself is a character*/
         map-> type[oldRow][oldCol] = 0;
+        treasureCollected(map, targetRow, targetCol);
         map-> grid[targetRow][targetCol] = 'P'; /* new player position*/
         map-> type[targetRow][targetCol] = 4;
 
@@ -129,6 +132,7 @@ int moveRight(Map *map){
 
         map-> grid[oldRow][oldCol] = ' '; /* used character value as the grid itself is a character*/
         map-> type[oldRow][oldCol] = 0;
+        treasureCollected(map, targetRow, targetCol);
         map-> grid[targetRow][targetCol] = 'P'; /* new player position*/
         map-> type[targetRow][targetCol] = 4;
 
@@ -138,4 +142,13 @@ int moveRight(Map *map){
     }
 
     return result; 
+}
+
+
+/* Checks if the targetted block is the treasure block */
+void treasureCollected(Map *map, int targetRow, int targetCol){
+
+    if(map-> type[targetRow][targetCol] == 3){
+        map-> treasureCollected = 1;
+    }
 }
