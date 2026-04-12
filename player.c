@@ -32,7 +32,7 @@ int moveUp(Map *map){
     int result;
 
     /* 1 if the move is valid and 0 if the move is invalid*/
-    if( targetRow < 0 || map->type[targetRow][targetCol] == 1){
+    if( targetRow < 0 || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected)){
         result = 0;
     }else{
         result = 1;
@@ -62,7 +62,7 @@ int moveDown(Map *map){
     int result;
 
     /* 1 if the move is valid and 0 if the move is invalid*/
-    if( targetRow >= (map->rows) || map->type[targetRow][targetCol] == 1){
+    if( targetRow >= (map->rows) || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected)){
         result = 0;
     }else{
         result = 1;
@@ -92,7 +92,7 @@ int moveLeft(Map *map){
     int result;
 
     /* 1 if the move is valid and 0 if the move is invalid*/
-    if( targetCol < 0 || map->type[targetRow][targetCol] == 1){
+    if( targetCol < 0 || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected)){
         result = 0;
     }else{
         result = 1;
@@ -122,7 +122,7 @@ int moveRight(Map *map){
     int result;
 
     /* 1 if the move is valid and 0 if the move is invalid*/
-    if( targetCol >= (map->cols) || map->type[targetRow][targetCol] == 1){
+    if( targetCol >= (map->cols) || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected)){
         result = 0;
     }else{
         result = 1;
