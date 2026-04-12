@@ -1,6 +1,7 @@
 #define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 #include "map.h"
 
 char ** allocateGrid(int rows, int cols){
@@ -8,10 +9,21 @@ char ** allocateGrid(int rows, int cols){
 
     char ** grid = (char **) malloc(rows * sizeof(char *));
     for(i = 0; i < rows; i++){
-        grid[i] = (char *) malloc(cols * sizeof(char *));
+        grid[i] = (char *) malloc(cols * sizeof(char));
     }
 
     return grid;
+}
+
+int **allocateType(int rows, int cols)
+{
+    int i;
+    int **type = (int **)malloc(rows * sizeof(int *));
+    for (i = 0; i < rows; i++)
+    {
+        type[i] = (int *)malloc(cols * sizeof(int));
+    }
+    return type;
 }
 
 char convertToChar(int item){
@@ -37,7 +49,7 @@ char convertToChar(int item){
 Map * createMap(const char *filename){
     int i,j, item;
 
-    FILE * fptr = fopen(filename, "r");
+    FILE *fptr;
     Map *map;
 
     /* Allocate the Map struct itself */
@@ -45,9 +57,10 @@ Map * createMap(const char *filename){
     map->treasureCollected = 0;
     
     /* EXCEPTION :- if the file is NULL*/
+    fptr = fopen(filename, "r");
     if (fptr == NULL)
     {
-        printf("Error: could not open file %s\n");
+        printf("Error: could not open file %s\n", filename);
         return NULL;
     }
 
@@ -57,11 +70,13 @@ Map * createMap(const char *filename){
 
     /* Initialize Map store the grid into the struct */
     map-> grid = allocateGrid(map-> rows , map-> cols);
+    map->type = allocateType(map->rows, map->cols);
 
     /* read the rest of the file */
     for (i = 0; i < map->rows; i++){
         for (j = 0; j < map->cols; j++){
             fscanf(fptr, "%d", &item);
+            map->type[i][j] = item; 
             map->grid[i][j] = convertToChar(item);
 
             /* Record the special objects */
@@ -96,7 +111,32 @@ void printMap(Map *map){
     for (i = 0; i < map->rows; i++){
         printf("*");
         for (j = 0; j < map->cols; j++){
-            printf("%c", map->grid[i][j]);
+            if(map->grid[i][j] == ' ' && map->type[i][j] == 1){
+                setBackground("white");
+                printf("%c", map->grid[i][j]);
+                setBackground("reset");
+            }else if(map->grid[i][j] == 'G' && map->type[i][j] == 2){
+                setBackground("green");
+                printf("%c", map->grid[i][j]);
+                setBackground("reset");
+            }else if(map->grid[i][j] == 'T'){
+                setBackground("yellow");
+                printf("%c", map->grid[i][j]);
+                setBackground("reset");
+            }else if(map->grid[i][j] == 'P'){
+                setForeground("blue");
+                printf("%c", map->grid[i][j]);
+                setForeground("reset");
+            }else if(map->grid[i][j] == '<'){
+                setForeground("red");
+                printf("%c", map->grid[i][j]);
+                setForeground("reset");
+            }else{
+                printf("%c", map->grid[i][j]);
+                setBackground("reset");
+                setForeground("reset");
+            }
+
         }
         printf("*\n");
     }
@@ -114,4 +154,56 @@ void printMap(Map *map){
 
 void freeMap(Map *map){
 
+}
+
+
+
+
+/* Set colors function */
+void setForeground(char * color)
+{
+    if(strcmp(color, "black") == 0)
+    {
+        printf("\033[30m");
+    }
+    else if(strcmp(color, "red") == 0)
+    {
+        printf("\033[31m");
+    }
+    else if(strcmp(color, "blue") == 0)
+    {
+        printf("\033[34m");
+    }
+    else if(strcmp(color, "white") == 0)
+    {
+        printf("\033[37m");
+    }
+    else if(strcmp(color, "reset") == 0)
+    {
+        printf("\033[39m");
+    }
+}
+
+void setBackground(char * color)
+{
+    if(strcmp(color, "black") == 0)
+    {
+        printf("\033[40m");
+    }
+    else if(strcmp(color, "green") == 0)
+    {
+        printf("\033[42m");
+    }
+    else if(strcmp(color, "yellow") == 0)
+    {
+        printf("\033[43m");
+    }
+    else if(strcmp(color, "white") == 0)
+    {
+        printf("\033[47m");
+    }
+    else if(strcmp(color, "reset") == 0)
+    {
+        printf("\033[49m");
+    }
 }

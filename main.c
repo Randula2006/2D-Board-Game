@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    system("clear"); /* clear once at the start */
+    system("cls"); /* clear once at the start */
     map = createMap(argv[1]);
     printMap(map);
     freeMap(map);

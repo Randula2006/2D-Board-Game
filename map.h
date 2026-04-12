@@ -3,6 +3,7 @@
 
 typedef struct {
     char ** grid;
+    int ** type;
     int rows;
     int cols;
     int playerRow;
@@ -17,10 +18,15 @@ typedef struct {
 
 }Map;
 
+int **allocateType(int rows, int cols);
+char ** allocateGrid(int rows, int cols);
+
 Map *createMap(const char *filename);
 char convertToChar(int item);
 void printMap(Map *map);
 
 void freeMap(Map *map);
+void setForeground(char * color);
+void setBackground(char * color);
 
 #endif /* MAP_H */
