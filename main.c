@@ -1,11 +1,13 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "map.h"
+#include "terminal.h"
 
 int main(int argc, char *argv[])
 {
     Map *map;
+    char input;
+    int gameOver;
 
     if (argc != 2)
     {
@@ -13,9 +15,26 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    system("cls"); /* clear once at the start */
     map = createMap(argv[1]);
-    printMap(map);
+    gameOver = 0;
+
+    disableBuffer();
+    system("clear"); /* clear once at the start */
+
+    while(gameOver == 0){
+        printMap(map);
+        
+        input = getInput();
+
+        if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
+            /* TODO: make movement for the character*/
+        }
+        else if (input == 'u'){ /* player undo control */
+            /*TODO: undo controls*/
+        }
+    }
+
+    enableBuffer();
     freeMap(map);
     return 0;
 }

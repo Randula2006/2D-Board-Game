@@ -1,7 +1,7 @@
 #define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 #include "map.h"
 
 char ** allocateGrid(int rows, int cols){
@@ -145,12 +145,10 @@ void printMap(Map *map){
     for(i = 0; i < (map-> cols)+2 ; i++){
         printf("*");
     }
-
+    printf("\n");
+    
     fflush(stdout);
 }
-
-/* helper function for map printing*/
-/* Reference :- Assignment supplementary video */
 
 void freeMap(Map *map){
     int i;
@@ -171,8 +169,6 @@ void freeMap(Map *map){
     /* Free the Map struct itself */
     free(map);
 }
-
-
 
 
 /* Set colors function */
