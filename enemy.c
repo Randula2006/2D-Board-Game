@@ -1,49 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "enemy.h"
+#include "random.h"
 #include "map.h"
-
-
-void enemyMovement(){
-    Map * map;
-
-    int tarForRow, tarForCol, tarForValidity;
-    int tarBackRow, tarBackCol, tarBackValidity;
-    int tarLeftRow, tarLeftCol, tarLeftValidity;
-    int tarRightRow, tarRightCol, tarRightValidity;
-
-    getForwardCell(map, &tarForRow, &tarForCol, &tarForValidity);
-    getBackwardCell(map, &tarBackRow, &tarBackCol, &tarBackValidity);
-    getLeftCell(map, &tarLeftRow, &tarLeftCol, &tarLeftValidity);
-    getRightCell(map, &tarRightRow, &tarRightCol, &tarRightValidity);
-
-
-
-}
-
-void getForwardCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
-    int targetRow = (map-> enemyRow)-1;
-    int targetCol = (map-> enemyCol);
-    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
-}
-
-void getBackwardCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
-    int targetRow = (map-> enemyRow)+1;
-    int targetCol = (map-> enemyCol);
-    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
-}
-
-void getLeftCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
-    int targetRow = (map-> playerRow);
-    int targetCol = (map-> playerCol)-1;
-    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
-}
-
-void getRightCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
-    int targetRow = (map-> playerRow);
-    int targetCol = (map-> playerCol)+1;
-    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
-}
 
 int checkValidityOfCell(int cellType){
     int validity; /* 1 means valid and 0 means invalid */
@@ -55,4 +14,52 @@ int checkValidityOfCell(int cellType){
     }
 
     return validity;
+}
+
+/* Relative direction from the facing direction */
+void movement(Map *map){
+    int tarForRow, tarForCol;
+    int tarBackRow, tarBackCol;
+    int tarLeftRow, tarLeftCol;
+    int tarRightRow, tarRightCol;
+    
+    int forward, backward, left, right;
+    char enemyFacingDirection = map-> grid[map-> enemyRow][map-> enemyCol];
+
+
+    if(enemyFacingDirection == '∧'){
+        forward = getCellFacing(map, -1, 0, &tarForRow, &tarForCol);
+        backward = getCellFacing(map, +1, 0, &tarBackRow, &tarBackCol);
+        left = getCellFacing(map, 0, -1, &tarLeftRow, &tarLeftCol);
+        right = getCellFacing(map, 0, +1, &tarRightRow, &tarRightCol);
+
+    }else if(enemyFacingDirection == 'v'){
+        forward = getCellFacing(map, +1, 0, &tarForRow, &tarForCol);
+        backward = getCellFacing(map, -1, 0, &tarBackRow, &tarBackCol);
+        left = getCellFacing(map, 0, +1, &tarLeftRow, &tarLeftCol);
+        right = getCellFacing(map, 0, -1, &tarRightRow, &tarRightCol);
+
+    }else if(enemyFacingDirection == '<'){
+        forward = getCellFacing(map, 0, -1, &tarForRow, &tarForCol);
+        backward = getCellFacing(map, 0, +1, &tarBackRow, &tarBackCol);
+        left = getCellFacing(map, -1, 0, &tarLeftRow, &tarLeftCol);
+        right = getCellFacing(map, +1, 0, &tarRightRow, &tarRightCol);
+
+    }else if(enemyFacingDirection == '>'){        
+        forward = getCellFacing(map, 0, +1, &tarForRow, &tarForCol);
+        backward = getCellFacing(map, 0, -1, &tarBackRow, &tarBackCol);
+        left = getCellFacing(map, +1, 0, &tarLeftRow, &tarLeftCol);
+        right = getCellFacing(map, -1, 0, &tarRightRow, &tarRightCol);
+
+    }else{
+        printf("Error in the character facing direction:\n");
+    }
+}
+
+
+/* Facing ∧ */
+int getCellFacing(Map *map, int x , int y, int *targetRow, int *targetCol){ /* Get cell while facing up*/
+    *targetRow = (map-> enemyRow) + x;
+    *targetCol = (map-> enemyCol) + y;
+    return checkValidityOfCell(map-> type[*targetRow][*targetCol]);
 }
