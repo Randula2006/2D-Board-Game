@@ -4,6 +4,7 @@
 #include "map.h" 
 
 int movePlayer(Map *map, char input);
+int playerMovement(Map *map, int targetRow, int targetCol, int condition);
 int moveUp(Map *map);
 int moveDown(Map *map);
 int moveLeft(Map *map);
