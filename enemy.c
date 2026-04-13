@@ -24,27 +24,35 @@ void enemyMovement(){
 void getForwardCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
     int targetRow = (map-> enemyRow)-1;
     int targetCol = (map-> enemyCol);
-    targetValidity = map-> type[targetRow][targetCol];
+    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
 }
 
 void getBackwardCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
     int targetRow = (map-> enemyRow)+1;
     int targetCol = (map-> enemyCol);
-    targetValidity = map-> type[targetRow][targetCol];
+    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
 }
 
 void getLeftCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
     int targetRow = (map-> playerRow);
     int targetCol = (map-> playerCol)-1;
-    targetValidity = map-> type[targetRow][targetCol];
+    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
 }
 
 void getRightCell(Map *map, int * targetRow, int * targetCol, int * targetValidity){
     int targetRow = (map-> playerRow);
     int targetCol = (map-> playerCol)+1;
-    targetValidity = map-> type[targetRow][targetCol];
+    targetValidity = checkValidityOfCell(map-> type[targetRow][targetCol]);
 }
 
-int checkValidityOfCell(){
-    /* TODO: do the validation for the targetted block */
+int checkValidityOfCell(int cellType){
+    int validity; /* 1 means valid and 0 means invalid */
+
+    if(cellType == 1 || cellType == 3 || cellType == 2){
+        validity = 0;
+    }else{
+        validity = 1;
+    }
+
+    return validity;
 }
