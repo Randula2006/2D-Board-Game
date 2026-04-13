@@ -3,11 +3,8 @@
 
 #include "map.h";
 
-void enemyMovement(Map *map);
-void getForwardCell(Map *map, int * targetRow, int * targetCol, int * targetValidity);
-void getBackwardCell(Map *map, int * targetRow, int * targetCol, int * targetValidity);
-void getLeftCell(Map *map, int * targetRow, int * targetCol, int * targetValidity);
-void getRightCell(Map *map, int * targetRow, int * targetCol, int * targetValidity);
+void movement(Map *map);
+int getCellFacing(Map *map, int x, int y, int *targetRow, int *targetCol);
 int checkValidityOfCell(int cellType);
 
 #endif /* ENEMY_H */

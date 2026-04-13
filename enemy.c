@@ -56,7 +56,6 @@ void movement(Map *map){
     }
 }
 
-
 /* Facing ∧ */
 int getCellFacing(Map *map, int x , int y, int *targetRow, int *targetCol){ /* Get cell while facing up*/
     *targetRow = (map-> enemyRow) + x;
