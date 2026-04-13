@@ -99,7 +99,6 @@ int playerMovement(Map *map, int targetRow, int targetCol, int condition){
 }
 
 
-
 /* Checks if the targetted block is the treasure block */
 void treasureCollected(Map *map, int targetRow, int targetCol){
 

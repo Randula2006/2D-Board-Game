@@ -3,12 +3,16 @@
 #include "map.h"
 #include "terminal.h"
 #include "player.h"
+#include "random.h"
 
 int main(int argc, char *argv[])
 {
     Map *map;
     char input;
     int gameOver;
+
+    /* Calling at the start of the program to set the seed*/
+    initRandom();
 
     if (argc != 2)
     {
