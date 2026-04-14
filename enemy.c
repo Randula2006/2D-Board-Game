@@ -1,5 +1,7 @@
+#define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h> 
 #include "enemy.h"
 #include "random.h"
 #include "map.h"
@@ -195,13 +197,23 @@ char rotateEnemy(char currentFacing, char rotationSide){
 void controlEnemyMovement(Map *map, int condition){
     if(map->treasureCollected == 0 && condition == 0){ /* move 2 times if treasure is not collected and player movement is valid */
         movement(map);
+        newSleep(0.2);
         movement(map);
     }else if(map->treasureCollected == 1 && condition == 0){ /* move 3 times if treaure is collected and player movement is valid */
         movement(map);
-         /*TODO: Adding delay to visually see the changes */
+        newSleep(0.2);
         movement(map);
+        newSleep(0.2);
         movement(map);
     }else{
         /* Do nothing as the player movement is invalid. */
     }
+}
+
+/* Reference: Supplymentery video "How to make program sleep" UCP*/
+void newSleep(float sec){
+	struct timespec ts;
+	ts.tv_sec = (int) sec;
+	ts.tv_nsec = (sec - ((int) sec)) * 1000000000;
+	nanosleep(&ts,NULL);
 }
