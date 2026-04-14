@@ -4,6 +4,7 @@
 #include "terminal.h"
 #include "player.h"
 #include "random.h"
+#include "enemy.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +33,8 @@ int main(int argc, char *argv[])
         input = getInput();
 
         if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
-            /* TODO: make movement for the character*/
             movePlayer(map, input);
+            controlEnemyMovement(map);
         }
         else if (input == 'u'){ /* player undo control */
             /*TODO: undo controls*/

@@ -189,3 +189,16 @@ char rotateEnemy(char currentFacing, char rotationSide){
     return facingDirection;
 }
 
+/* Enemy movement depending on treasure collected or not */
+void controlEnemyMovement(Map *map){
+    if(map->treasureCollected == 0){ /* move 2 times if treasure is not collected */
+        movement(map);
+        movement(map);
+    }else if(map->treasureCollected == 1){ /* move 3 times if treaure is collected */
+        movement(map);
+        movement(map);
+        movement(map);
+    }else{
+        printf("Exception: Error in enemy control");
+    }
+}
