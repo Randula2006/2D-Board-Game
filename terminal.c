@@ -7,6 +7,7 @@ char getInput(void){
     return getchar();
 }
 
+/* Reference: supplymentary video UCP*/
 void disableBuffer()
 {
     struct termios mode;
