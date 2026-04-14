@@ -148,7 +148,9 @@ void enemyMove(Map *map, int targetRow, int targetCol, char facingDirection){
 
     map->grid[oldRow][oldCol] = ' '; /* used character value as the grid itself is a character*/
     map->type[oldRow][oldCol] = 0;
+    setForeground("red");
     map->grid[targetRow][targetCol] = facingDirection; /* new enemy position*/
+    setForeground("reset");
     map->type[targetRow][targetCol] = 5;
 
     /* Updating enemyRow and enemyCol */

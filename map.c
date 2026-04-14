@@ -127,7 +127,7 @@ void printMap(Map *map){
                 setForeground("blue");
                 printf("%c", map->grid[i][j]);
                 setForeground("reset");
-            }else if(map->grid[i][j] == '<'){
+            }else if(map->type[i][j] == 5){ /* as enemy has many directions set */
                 setForeground("red");
                 printf("%c", map->grid[i][j]);
                 setForeground("reset");
