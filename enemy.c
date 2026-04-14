@@ -25,12 +25,10 @@ void movement(Map *map){
     
     int forward, backward, left, right;
     int direction; /* random number value given by randomNumber function */
-
-    /* getting enemy facing direction each time the function runs */
-    char enemyFacingDirection = map-> grid[map-> enemyRow][map-> enemyCol];
+    char enemyFacingDirection = map-> grid[map-> enemyRow][map-> enemyCol];    /* getting enemy facing direction each time the function runs */
 
 
-    if(enemyFacingDirection == '∧'){
+    if(enemyFacingDirection == '^'){
         forward = getCellFacing(map, -1, 0, &tarForRow, &tarForCol);
         backward = getCellFacing(map, +1, 0, &tarBackRow, &tarBackCol);
         left = getCellFacing(map, 0, -1, &tarLeftRow, &tarLeftCol);
@@ -163,23 +161,23 @@ char rotateEnemy(char currentFacing, char rotationSide){
     switch (rotationSide)
     {
     case 'L':
-        if(currentFacing == '∧'){facingDirection = '<';}
+        if(currentFacing == '^'){facingDirection = '<';}
         if(currentFacing == '<'){facingDirection = 'v';}
         if(currentFacing == 'v'){facingDirection = '>';}
-        if(currentFacing == '>'){facingDirection = '∧';}
+        if(currentFacing == '>'){facingDirection = '^';}
         break;
 
     case 'R':
-        if(currentFacing == '∧'){facingDirection = '>';}
-        if(currentFacing == '<'){facingDirection = '∧';}
+        if(currentFacing == '^'){facingDirection = '>';}
+        if(currentFacing == '<'){facingDirection = '^';}
         if(currentFacing == 'v'){facingDirection = '<';}
         if(currentFacing == '>'){facingDirection = 'v';}
         break;
 
     case 'B':
-        if(currentFacing == '∧'){facingDirection = 'v';}
+        if(currentFacing == '^'){facingDirection = 'v';}
         if(currentFacing == '<'){facingDirection = '>';}
-        if(currentFacing == 'v'){facingDirection = '∧';}
+        if(currentFacing == 'v'){facingDirection = '^';}
         if(currentFacing == '>'){facingDirection = '<';}
         break;
 
