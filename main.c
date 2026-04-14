@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
     enableBuffer();
 
     printMap(map);  /* show final map state */
+    
     if(gameOver == 1){
         printf("Congratulations: You Won!!!.\n");
     }
