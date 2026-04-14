@@ -114,7 +114,7 @@ void movement(Map *map){
     }
 
     /* case-5: all sides are blocked. 180 rotation. */
-    else if(forward == 0 && left == 0 && right == 0){
+    else if(forward == 0 && left == 0 && right == 0 && backward == 1){
         enemyMove(map, tarBackRow, tarBackCol,rotateEnemy(enemyFacingDirection, 'B'));
     }
     /* If an Exception occur in the system */
@@ -198,6 +198,7 @@ void controlEnemyMovement(Map *map, int condition){
         movement(map);
     }else if(map->treasureCollected == 1 && condition == 0){ /* move 3 times if treaure is collected and player movement is valid */
         movement(map);
+         /*TODO: Adding delay to visually see the changes */
         movement(map);
         movement(map);
     }else{

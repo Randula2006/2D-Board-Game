@@ -1,7 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "map.h";
+#include "map.h"
 
 int checkValidityOfCell(int cellType);
 void movement(Map *map);
