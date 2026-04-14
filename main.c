@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     Map *map;
     char input;
     int gameOver;
+    int condition; /* 0 if the move is valid and 1 if it is wrong*/
 
     /* Calling at the start of the program to set the seed*/
     initRandom();
@@ -33,8 +34,8 @@ int main(int argc, char *argv[])
         input = getInput();
 
         if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
-            movePlayer(map, input);
-            controlEnemyMovement(map);
+            condition = movePlayer(map, input);
+            controlEnemyMovement(map, condition);
         }
         else if (input == 'u'){ /* player undo control */
             /*TODO: undo controls*/

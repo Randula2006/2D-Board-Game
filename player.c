@@ -5,22 +5,22 @@
 
 int movePlayer(Map *map, char input){
 
-    int playerMoved;
+    int condition;
 
     if(input == 'w'){
-        playerMoved = moveUp(map);
+        condition = moveUp(map);
     }else if(input == 'a'){
-        playerMoved = moveLeft(map);
+        condition = moveLeft(map);
     }else if(input == 's'){
-        playerMoved = moveDown(map);
+        condition = moveDown(map);
     }else if(input == 'd'){
-        playerMoved = moveRight(map);
+        condition = moveRight(map);
     }else{
-        playerMoved = 0;
+        condition = 0;
     }
 
 
-    return playerMoved;
+    return condition;
 }
 
 
@@ -28,22 +28,22 @@ int moveUp(Map *map){
     int targetRow = (map-> playerRow)-1;
     int targetCol = (map-> playerCol);
 
-    /* 1 if the move is valid and 0 if the move is invalid*/
+    /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetRow < 0 || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
     int result = playerMovement(map, targetRow, targetCol, condition);
-    return result; 
+    return condition; 
 }
 
 int moveDown(Map *map){
     int targetRow = (map-> playerRow)+1;
     int targetCol = (map-> playerCol);
 
-    /* 1 if the move is valid and 0 if the move is invalid*/
+    /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetRow >= (map->rows) || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
     int result = playerMovement(map, targetRow, targetCol, condition);
-    return result;
+    return condition;
 
 }
 
@@ -51,22 +51,22 @@ int moveLeft(Map *map){
     int targetRow = (map-> playerRow);
     int targetCol = (map-> playerCol)-1;
 
-    /* 1 if the move is valid and 0 if the move is invalid*/
+    /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetCol < 0 || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
     int result = playerMovement(map, targetRow, targetCol, condition);
-    return result;
+    return condition;
 }
 
 int moveRight(Map *map){
     int targetRow = (map-> playerRow);
     int targetCol = (map-> playerCol)+1;
 
-    /* 1 if the move is valid and 0 if the move is invalid*/
+    /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetCol >= (map->cols) || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
     int result = playerMovement(map, targetRow, targetCol, condition);
-    return result;
+    return condition;
 }
 
 int playerMovement(Map *map, int targetRow, int targetCol, int condition){

@@ -192,15 +192,15 @@ char rotateEnemy(char currentFacing, char rotationSide){
 }
 
 /* Enemy movement depending on treasure collected or not */
-void controlEnemyMovement(Map *map){
-    if(map->treasureCollected == 0){ /* move 2 times if treasure is not collected */
+void controlEnemyMovement(Map *map, int condition){
+    if(map->treasureCollected == 0 && condition == 0){ /* move 2 times if treasure is not collected and player movement is valid */
         movement(map);
         movement(map);
-    }else if(map->treasureCollected == 1){ /* move 3 times if treaure is collected */
+    }else if(map->treasureCollected == 1 && condition == 0){ /* move 3 times if treaure is collected and player movement is valid */
         movement(map);
         movement(map);
         movement(map);
     }else{
-        printf("Exception: Error in enemy control");
+        /* Do nothing as the player movement is invalid. */
     }
 }
