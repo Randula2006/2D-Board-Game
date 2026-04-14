@@ -5,6 +5,7 @@
 #include "player.h"
 #include "random.h"
 #include "enemy.h"
+#include "game.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,7 +36,13 @@ int main(int argc, char *argv[])
 
         if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
             condition = movePlayer(map, input);
-            controlEnemyMovement(map, condition);
+            gameOver = gameloop(map);
+
+            if(gameOver == 0){
+                controlEnemyMovement(map, condition);
+                gameOver = gameloop(map);
+            }
+            
         }
         else if (input == 'u'){ /* player undo control */
             /*TODO: undo controls*/
@@ -43,6 +50,16 @@ int main(int argc, char *argv[])
     }
 
     enableBuffer();
+
+    printMap(map);  /* show final map state */
+    if(gameOver == 1){
+        printf("Congratulations: You Won!!!.\n");
+    }
+    if(gameOver == 2){
+        printf("Player lose. Try again.\n");
+    }
+
+    /* release Malloc use of Map */
     freeMap(map);
     return 0;
 }

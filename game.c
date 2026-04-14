@@ -12,14 +12,12 @@ int gameloop(Map *map){
     /* Winning Scenario */
     if (map->treasureCollected && ((map->playerRow == map->goalRow) && (map->playerCol == map->goalCol)))
     {
-        printf("Congradulation: You Won!!!.");
         result = 1;
     }
     /* Losing Scenario */
     else if ((map->playerRow == map->enemyRow) && (map->playerCol == map->enemyCol))
     {
-        printf("Player lose.\n Try again.");
-        result = 1;
+        result = 2;
     }
     else
     {
