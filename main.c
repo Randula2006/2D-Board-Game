@@ -41,6 +41,11 @@ int main(int argc, char *argv[])
             if(gameOver == 0){
                 controlEnemyMovement(map, condition);
                 gameOver = gameloop(map);
+
+                /* Immidietely show the final state*/
+                if(gameOver != 0){
+                    printMap(map);
+                }
             }
             
         }
