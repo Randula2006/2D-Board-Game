@@ -197,13 +197,13 @@ char rotateEnemy(char currentFacing, char rotationSide){
 void controlEnemyMovement(Map *map, int condition){
     if(map->treasureCollected == 0 && condition == 0){ /* move 2 times if treasure is not collected and player movement is valid */
         movement(map);
-        newSleep(0.2);
+        newSleep(0.13);
         movement(map);
     }else if(map->treasureCollected == 1 && condition == 0){ /* move 3 times if treaure is collected and player movement is valid */
         movement(map);
-        newSleep(0.2);
+        newSleep(0.13);
         movement(map);
-        newSleep(0.2);
+        newSleep(0.13);
         movement(map);
     }else{
         /* Do nothing as the player movement is invalid. */

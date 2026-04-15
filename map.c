@@ -157,6 +157,9 @@ void printMap(Map *map){
     }
     printf("\n");
     
+    printf("Press 'w' to move UP\nPress 's' to move DOWN\nPress 'a' to move LEFT\n");
+    printf("Press 'd' to move RIGHT\nPress 'u' to UNDO\n");
+
     fflush(stdout);
 }
 
