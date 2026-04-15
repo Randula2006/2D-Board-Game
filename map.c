@@ -128,9 +128,19 @@ void printMap(Map *map){
                 printf("%c", map->grid[i][j]);
                 setForeground("reset");
             }else if(map->type[i][j] == 5){ /* as enemy has many directions set */
-                setForeground("red");
-                printf("%c", map->grid[i][j]);
-                setForeground("reset");
+                /* visualize red to indicate treasure being collected */
+                if(map->treasureCollected == 1){ 
+                    setBackground("red");
+                    setForeground("red");
+                    printf("%c", map->grid[i][j]);
+                    setForeground("reset");
+                    setBackground("reset");
+                }else{
+                    setForeground("red");
+                    printf("%c", map->grid[i][j]);
+                    setForeground("reset");
+                }
+
             }else{
                 printf("%c", map->grid[i][j]);
                 setBackground("reset");
@@ -170,7 +180,7 @@ void freeMap(Map *map){
     free(map);
 }
 
-
+/* Reference: Supplymentary video UCP*/
 /* Set colors function */
 void setForeground(char * color)
 {
@@ -201,6 +211,10 @@ void setBackground(char * color)
     if(strcmp(color, "black") == 0)
     {
         printf("\033[40m");
+    }
+    else if(strcmp(color, "red") == 0)
+    {
+        printf("\033[41m");
     }
     else if(strcmp(color, "green") == 0)
     {
