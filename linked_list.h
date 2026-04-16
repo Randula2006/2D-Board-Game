@@ -23,6 +23,8 @@ typedef struct{
 } LinkedList;
 
 
+LinkedList * createList();
+void saveState(LinkedList * list, Map * map);
 
 
 #endif /* LINKED_LIST_H */
