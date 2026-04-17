@@ -1,6 +1,8 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include "map.h"
+
 typedef struct {
     int playerRow, playerCol;
     int enemyRow, enemyCol;
