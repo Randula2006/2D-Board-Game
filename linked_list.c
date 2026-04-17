@@ -84,7 +84,7 @@ void restoreState(LinkedList * list, Map * map){
         map-> enemyRow = state-> enemyRow;
         map-> enemyCol = state-> enemyCol;
         map-> treasureCollected = state-> treasureCollected;
-        map-> grid[map->enemyRow][map->enemyCol] = state-> enemyFacing;
+        map-> grid[state->enemyRow][state->enemyCol] = state-> enemyFacing;
 
         for(i = 0; i < map->rows; i++){
             for(j = 0; j < map->cols; j++){
@@ -127,6 +127,49 @@ void restoreState(LinkedList * list, Map * map){
 }
 
 
+void freeList(LinkedList * list, Map * map){
+    int i;
+    Node * temp;
+    Node * nextNode;
+    GameState * state;
+
+    temp = list-> head;
+
+
+    /* Freeing the malloc from used by the grid and the type */
+    /* Free the grid */
+    while(temp != NULL){
+        
+        nextNode = temp-> next;
+        state = (GameState *) temp->data;
+
+        for (i = 0; i < map->rows; i++)
+        {
+            free(state->grid[i]);
+        }
+        free(state->grid);
+
+        /* Free the type */
+        for (i = 0; i < map->rows; i++)
+        {
+            free(state->type[i]);
+        }
+        free(state->type);
+
+        /* Finally free the game-state */
+        free(state);
+
+        free(temp);
+        temp = nextNode;
+    }
+
+    /* Setting values to 0 before freeing up the list */
+    list-> head = NULL;
+    list-> size = 0;
+    free(list);
+
+}
+
 /* Reference: https://www.geeksforgeeks.org/c/stack-using-linked-list-in-c/ */
 /* Function to create a new node and push it into the stack */
 struct Node *push(struct Node *top, void * data){
@@ -139,6 +182,4 @@ struct Node *push(struct Node *top, void * data){
     
     return top;
 }
-
-
 
