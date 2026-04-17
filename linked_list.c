@@ -135,11 +135,9 @@ void freeList(LinkedList * list, Map * map){
 
     temp = list-> head;
 
-
-    /* Freeing the malloc from used by the grid and the type */
-    /* Free the grid */
+    /* Go through the whole linked list and free malloc from every single node */
     while(temp != NULL){
-        
+
         nextNode = temp-> next;
         state = (GameState *) temp->data;
 
@@ -169,17 +167,3 @@ void freeList(LinkedList * list, Map * map){
     free(list);
 
 }
-
-/* Reference: https://www.geeksforgeeks.org/c/stack-using-linked-list-in-c/ */
-/* Function to create a new node and push it into the stack */
-struct Node *push(struct Node *top, void * data){
-    struct Node * newNode = (struct Node *)malloc(sizeof(struct Node));
-
-    newNode-> data = data;
-    newNode-> next = top;
-    top = newNode;
-    
-    
-    return top;
-}
-
