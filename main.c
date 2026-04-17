@@ -26,6 +26,10 @@ int main(int argc, char *argv[])
     }
 
     map = createMap(argv[1]);
+    if(map == NULL){
+        return 1;
+    }
+
     gameOver = 0;
 
     disableBuffer();

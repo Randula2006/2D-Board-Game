@@ -61,6 +61,7 @@ Map * createMap(const char *filename){
     if (fptr == NULL)
     {
         printf("Error: could not open file %s\n", filename);
+        free(map);  
         return NULL;
     }
 
