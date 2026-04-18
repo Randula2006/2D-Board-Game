@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     if (argc != 2)
     {
         printf("Usage: ./labyrinth <map_file>\n");
+        free(list);
         return 1;
     }
 

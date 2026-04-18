@@ -31,7 +31,7 @@ int moveUp(Map *map){
     /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetRow < 0 || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
-    int result = playerMovement(map, targetRow, targetCol, condition);
+    playerMovement(map, targetRow, targetCol, condition);
     return condition; 
 }
 
@@ -42,7 +42,7 @@ int moveDown(Map *map){
     /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetRow >= (map->rows) || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
-    int result = playerMovement(map, targetRow, targetCol, condition);
+    playerMovement(map, targetRow, targetCol, condition);
     return condition;
 
 }
@@ -54,7 +54,7 @@ int moveLeft(Map *map){
     /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetCol < 0 || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
-    int result = playerMovement(map, targetRow, targetCol, condition);
+    playerMovement(map, targetRow, targetCol, condition);
     return condition;
 }
 
@@ -65,7 +65,7 @@ int moveRight(Map *map){
     /* 0 if the move is valid and 1 if the move is invalid*/
     int condition = targetCol >= (map->cols) || map->type[targetRow][targetCol] == 1 || (map->type[targetRow][targetCol] == 2 && !map->treasureCollected);
     
-    int result = playerMovement(map, targetRow, targetCol, condition);
+    playerMovement(map, targetRow, targetCol, condition);
     return condition;
 }
 

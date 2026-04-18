@@ -9,5 +9,6 @@ int moveUp(Map *map);
 int moveDown(Map *map);
 int moveLeft(Map *map);
 int moveRight(Map *map);
+void treasureCollected(Map *map, int targetRow, int targetCol);
 
 #endif /* PLAYER_H */
