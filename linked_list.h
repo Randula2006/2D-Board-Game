@@ -28,6 +28,7 @@ typedef struct{
 LinkedList * createList();
 void saveState(LinkedList * list, Map * map);
 void restoreState(LinkedList * list, Map * map);
+void removeLastSave(LinkedList * list, Map * map);
 void freeList(LinkedList * list, Map * map);
 
 #endif /* LINKED_LIST_H */

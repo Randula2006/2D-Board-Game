@@ -126,6 +126,42 @@ void restoreState(LinkedList * list, Map * map){
 
 }
 
+void removeLastSave(LinkedList * list, Map * map){
+    int i;
+    Node * temp;
+    GameState * state;
+
+    /* check if the list is empty */
+    if(list-> head != NULL){
+        temp = list-> head;
+        state = (GameState *) temp-> data;
+
+        /* Freeing the malloc from used by the grid and the type */
+        /* Free the grid */
+        for(i = 0; i < map->rows; i++){
+            free(state->grid[i]);
+        }
+        free(state->grid);
+
+        /* Free the type */
+        for (i = 0; i < map->rows; i++)
+        {
+            free(state->type[i]);
+        }
+        free(state->type);
+
+        /* Finally free the game-state */
+        free(state);
+
+        /* Move head forward */
+        list->head = temp->next;
+
+        /* Free the node*/
+        free(temp);
+
+        list-> size--;
+    }
+}
 
 void freeList(LinkedList * list, Map * map){
     int i;

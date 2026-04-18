@@ -42,11 +42,12 @@ int main(int argc, char *argv[])
         input = getInput();
 
         if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
+            saveState(list, map);
             condition = movePlayer(map, input); /* Move valid = 0 , move invalid = 1*/
 
-            /* only save if move succeeded */
-            if (condition == 0){ 
-                saveState(list, map);
+            /* remove the save if the move is invalid */
+            if (condition != 0){ 
+                removeLastSave()
             }
 
             gameOver = gameloop(map);
