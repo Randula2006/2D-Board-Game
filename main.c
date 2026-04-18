@@ -14,74 +14,86 @@ int main(int argc, char *argv[])
     char input;
     int gameOver;
     int condition; /* 0 if the move is valid and 1 if it is wrong*/
-    LinkedList * list = createList();
+    int result = 0;
+    LinkedList * list;
 
     /* Calling at the start of the program to set the seed*/
     initRandom();
 
-    if (argc != 2)
-    {
+    if (argc != 2){
         printf("Usage: ./labyrinth <map_file>\n");
-        free(list);
-        return 1;
+        result = 1;
     }
+    else{
 
-    map = createMap(argv[1]);
-    if(map == NULL){
-        return 1;
-    }
+        list = createList();
+        map = createMap(argv[1]);
 
-    gameOver = 0;
+        if (map == NULL){
+            free(list);
+            result = 1;
+        }
+        else{
+            gameOver = 0;
 
-    disableBuffer();
-    system("clear"); /* clear once at the start */
+            disableBuffer();
+            system("clear"); /* clear once at the start */
 
+            while (gameOver == 0)
+            {
+                printMap(map);
 
-    while(gameOver == 0){
-        printMap(map);
-        
-        input = getInput();
+                input = getInput();
 
-        if (input == 'w' || input == 'a' || input == 's' || input == 'd'){
-            saveState(list, map);
-            condition = movePlayer(map, input); /* Move valid = 0 , move invalid = 1*/
+                if (input == 'w' || input == 'a' || input == 's' || input == 'd')
+                {
+                    saveState(list, map);
+                    condition = movePlayer(map, input); /* Move valid = 0 , move invalid = 1*/
 
-            /* remove the save if the move is invalid */
-            if (condition != 0){ 
-                removeLastSave()
-            }
+                    /* remove the save if the move is invalid */
+                    if (condition != 0)
+                    {
+                        removeLastSave(list, map);
+                    }
 
-            gameOver = gameloop(map);
+                    gameOver = gameloop(map);
 
-            if(gameOver == 0){
-                controlEnemyMovement(map, condition);
-                gameOver = gameloop(map);
+                    if (gameOver == 0)
+                    {
+                        controlEnemyMovement(map, condition);
+                        gameOver = gameloop(map);
 
-                /* Immidietely show the final state*/
-                if(gameOver != 0){
-                    printMap(map);
+                        /* Immidietely show the final state*/
+                        if (gameOver != 0)
+                        {
+                            printMap(map);
+                        }
+                    }
+                }
+                else if (input == 'u')
+                { /* player undo control */
+                    restoreState(list, map);
                 }
             }
-            
+
+            enableBuffer();
+
+            printMap(map); /* show final map state */
+
+            if (gameOver == 1)
+            {
+                printf("Congratulations: You Won!!!.\n");
+            }
+            if (gameOver == 2)
+            {
+                printf("Player lose. Try again.\n");
+            }
+
+            /* release Malloc use of Map and the Linked list plus its nodes*/
+            freeList(list, map);
+            freeMap(map);
         }
-        else if (input == 'u'){ /* player undo control */
-            restoreState(list, map);
-        }
     }
 
-    enableBuffer();
-
-    printMap(map);  /* show final map state */
-    
-    if(gameOver == 1){
-        printf("Congratulations: You Won!!!.\n");
-    }
-    if(gameOver == 2){
-        printf("Player lose. Try again.\n");
-    }
-
-    /* release Malloc use of Map and the Linked list plus its nodes*/
-    freeList(list, map);
-    freeMap(map);
-    return 0;
+    return result; 
 }
