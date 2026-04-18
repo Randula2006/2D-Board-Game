@@ -132,7 +132,7 @@ void printMap(Map *map){
                 /* visualize red to indicate treasure being collected */
                 if(map->treasureCollected == 1){ 
                     setBackground("red");
-                    setForeground("red");
+                    setForeground("white");
                     printf("%c", map->grid[i][j]);
                     setForeground("reset");
                     setBackground("reset");
