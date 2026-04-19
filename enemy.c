@@ -193,28 +193,15 @@ char rotateEnemy(char currentFacing, char rotationSide){
 
 /* Enemy movement depending on treasure collected or not */
 void controlEnemyMovement(Map *map, int condition){
-    int playerHit = 0;
     
     if(map->treasureCollected == 0 && condition == 0){ /* move 2 times if treasure is not collected and player movement is valid */
         movement(map);
-        playerHit = ((map->playerRow == map-> enemyRow) && (map-> playerCol == map->enemyCol));
-        if(playerHit == 0){
-            newSleep(0.13);
-            movement(map);
-        }
+        isPlayerHit(map);
 
     }else if(map->treasureCollected == 1 && condition == 0){ /* move 3 times if treaure is collected and player movement is valid */
         movement(map);
-        playerHit = ((map->playerRow == map-> enemyRow) && (map-> playerCol == map->enemyCol));
-        if(playerHit == 0){
-            newSleep(0.13);
-            movement(map);
-        }
-        playerHit = ((map->playerRow == map-> enemyRow) && (map-> playerCol == map->enemyCol));
-        if(playerHit == 0){
-            newSleep(0.13);
-            movement(map);
-        }
+        isPlayerHit(map);
+        isPlayerHit(map);
     }else{
         /* Do nothing as the player movement is invalid. */
     }
@@ -226,4 +213,14 @@ void newSleep(float sec){
 	ts.tv_sec = (int) sec;
 	ts.tv_nsec = (sec - ((int) sec)) * 1000000000;
 	nanosleep(&ts,NULL);
+}
+
+/* check whether the player got hit and only move if not */
+void isPlayerHit(Map * map){
+    int condition = ((map->playerRow == map-> enemyRow) && (map-> playerCol == map->enemyCol));
+    
+    if (condition == 0){
+        newSleep(0.13);
+        movement(map);
+    }
 }

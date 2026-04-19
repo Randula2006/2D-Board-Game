@@ -9,6 +9,7 @@ int getCellFacing(Map *map, int x , int y, int *targetRow, int *targetCol);
 void enemyMove(Map *map, int targetRow, int targetCol, char facingDirection);
 char rotateEnemy(char currentFacing, char rotationSide);
 void controlEnemyMovement(Map *map, int condition);
+void isPlayerHit(Map * map);
 void newSleep(float sec);
 
 #endif /* ENEMY_H */
