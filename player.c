@@ -73,16 +73,8 @@ int playerMovement(Map *map, int targetRow, int targetCol, int condition){
 
     int oldRow = map->playerRow;   /* save old position */
     int oldCol = map->playerCol;   /* save old position */
-    int result;
 
-    /* 1 if the move is valid and 0 if the move is invalid*/
-    if(condition){
-        result = 0;
-    }else{
-        result = 1;
-    }
-
-    if(result == 1){
+    if(condition == 0){
 
         map-> grid[oldRow][oldCol] = ' '; /* used character value as the grid itself is a character*/
         map-> type[oldRow][oldCol] = 0;
@@ -95,7 +87,7 @@ int playerMovement(Map *map, int targetRow, int targetCol, int condition){
         map->playerCol = targetCol;
     }
 
-    return result; 
+    return condition; 
 }
 
 
