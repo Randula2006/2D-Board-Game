@@ -6,7 +6,7 @@ OBJ = main.o map.o player.o enemy.o terminal.o linked_list.o game.o random.o
 labyrinth: $(OBJ)
 	$(CC) $(OBJ) -o labyrinth
 
-main.o: main.c map.h terminal.h player.h
+main.o: main.c map.h terminal.h player.h random.h enemy.h game.h linked_list.h
 	$(CC) $(CFLAGS) -c main.c
 
 map.o: map.c map.h
